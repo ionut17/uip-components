@@ -1,0 +1,18 @@
+<main>
+  <h1>Progress demo</h1>
+
+  <t-progress [radius]="50" [progress]="progress" color="#41b3a3"></t-progress>
+
+  <h1>Table-grid demo</h1>
+
+  <t-grid
+    [data]="myData$.asObservable()"
+    [sortable]="true"
+    [pageSize]="8"
+    (paginationChange)="performFetch($event)"
+  >
+    <t-column name="Id" property="id" [sortable]="true"></t-column>
+    <t-column name="Title" property="title" [sortable]="true"></t-column>
+    <t-column name="Body" property="body" [sortable]="false"></t-column>
+  </t-grid>
+</main>

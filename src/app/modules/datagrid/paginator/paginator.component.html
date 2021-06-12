@@ -1,0 +1,7 @@
+<ng-container *ngIf="pageSize">
+  <button (click)="previous()"  [disabled]="page < 1">Prev</button>
+  <div class="page-indicator">
+    {{ page + 1 }}<span class="total"> / {{ totalPages }}</span>
+  </div>
+  <button (click)="next()" [disabled]="page + 1 >= totalPages">Next</button>
+</ng-container>

@@ -1,0 +1,7 @@
+:host {
+    svg circle {
+        transform: scale(-1, 1);
+        transform-origin: center center;
+        fill: transparent;
+    }
+}

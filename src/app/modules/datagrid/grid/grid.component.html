@@ -1,0 +1,55 @@
+<ng-container *ngIf="rows$ | async as rows">
+  <ng-container *ngIf="rows?.length; else noData">
+    <table class="t-grid">
+      <thead class="t-head">
+        <tr class="t-row">
+          <th
+            *ngFor="let col of columns"
+            class="t-cell"
+            [class.sortable]="sortable && col.sortable"
+          >
+            <span (click)="sortBy(col)">
+              {{ col.name }}
+              <figure
+                *ngIf="sort?.columnName === col?.property"
+                class="arrow"
+                [ngClass]="sort?.direction?.toLowerCase() || ''"
+              ></figure>
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="t-body">
+        <tr
+          class="t-row"
+          *ngFor="
+            let row of (rows | tgridSort:sort) | tgridPaginate:page:pageSize:sort
+          "
+        >
+          <td *ngFor="let col of columns" class="t-cell">
+            {{ row[col.property] }}
+          </td>
+        </tr>
+      </tbody>
+      <ng-content></ng-content>
+    </table>
+    <section class="t-actions">
+      <select
+        *ngIf="pageSize"
+        [ngModel]="pageSize"
+        (ngModelChange)="pageSizeChange($event)"
+      >
+        <ng-container *ngFor="let size of pageSizeOptions">
+          <option *ngIf="size <= rows.length" [value]="size">{{ size }}</option>
+        </ng-container>
+      </select>
+      <t-paginator
+        [page]="page"
+        [pageSize]="pageSize"
+        [total]="rows.length"
+        (goToPage)="page = $event"
+      ></t-paginator>
+    </section>
+  </ng-container>
+  <ng-template #noData> Loading... </ng-template>
+</ng-container>

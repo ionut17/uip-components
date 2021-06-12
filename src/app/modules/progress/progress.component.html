@@ -1,0 +1,14 @@
+<svg
+  [attr.height]="containerSize"
+  [attr.width]="containerSize"
+>
+  <circle
+    [attr.cx]="centerSize"
+    [attr.cy]="centerSize"
+    [attr.r]="radius"
+    [style.stroke-dasharray]="perimeter"
+    [style.stroke-dashoffset]="perimeter + offset"
+    [attr.stroke-width]="strokeWidth"
+    [attr.stroke]="color"
+  />
+</svg>
